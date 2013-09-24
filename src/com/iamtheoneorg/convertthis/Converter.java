@@ -3,11 +3,10 @@ package com.iamtheoneorg.convertthis;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import android.util.Log;
+
 import com.iamtheoneorg.convertthis.units.Feet;
 import com.iamtheoneorg.convertthis.units.Inch;
-
-import android.util.Log;
-import android.widget.ArrayAdapter;
 
 public class Converter {
 	private final String TAG = "Converter.java";

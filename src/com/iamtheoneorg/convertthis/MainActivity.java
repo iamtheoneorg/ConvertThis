@@ -1,9 +1,9 @@
 package com.iamtheoneorg.convertthis;
 
-import android.os.Bundle;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.util.Log;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,9 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import com.iamtheoneorg.convertthis.*;
-import com.iamtheoneorg.convertthis.units.*;
 
 public class MainActivity extends Activity {
 	
@@ -40,7 +37,35 @@ public class MainActivity extends Activity {
 		setToSpinnerValue();
 		
 		setFromSpinnerEvent();
+		setToSpinnerEvent();
+		
+		setEditTextEvent();
 		}
+
+	private void setEditTextEvent() {
+		value.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				setResult();
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+	}
 
 	private void setFromSpinnerEvent() {
 		fromSpinner.setOnItemSelectedListener(new OnItemSelectedListener(){
@@ -49,6 +74,7 @@ public class MainActivity extends Activity {
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
 				setToSpinnerValue();
+				setResult();
 				
 			}
 
@@ -63,13 +89,37 @@ public class MainActivity extends Activity {
 		
 
 	}
+	
+
+	private void setToSpinnerEvent() {
+		toSpinner.setOnItemSelectedListener(new OnItemSelectedListener(){
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				setResult();
+				
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+		
+
+	}
+	
 
 	private void setToSpinnerValue() {
 		
 		converter = new Converter();
 		String fromUnit = fromSpinner.getSelectedItem().toString();
 		
-		ArrayAdapter<String> fromAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, converter.getToUnitsAvailableToFromUnit( fromUnit  ));
+		ArrayAdapter<String> fromAdapter = new ArrayAdapter<String>(this, R.layout.spinner_layout, converter.getToUnitsAvailableToFromUnit( fromUnit  ));
 		
 		toSpinner.setAdapter(fromAdapter);
 		
@@ -79,7 +129,7 @@ public class MainActivity extends Activity {
 		
 		converter = new Converter();
 		
-		ArrayAdapter<String> fromAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,converter.getFromUnits());
+		ArrayAdapter<String> fromAdapter = new ArrayAdapter<String>(this, R.layout.spinner_layout,converter.getFromUnits());
 		
 		fromSpinner.setAdapter(fromAdapter);
 		
@@ -92,13 +142,24 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	public void butConvertClicked(View view) {
-		
+	public void setResult(){
 		String from = fromSpinner.getSelectedItem().toString();
 		String to = toSpinner.getSelectedItem().toString();
-		double myValue = Double.parseDouble( value.getText().toString());
-
+		
+		double myValue;
+		try {
+			myValue = Double.parseDouble( value.getText().toString());
+		}
+		catch (Exception e ){
+			myValue = 0.0;
+		}
+		
 		result.setText(converter.convertThis(from, to, myValue));
+	}
+	
+	public void butConvertClicked(View view) {
+		setResult();
+		
 	}
 	
 }
