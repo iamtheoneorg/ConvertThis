@@ -157,9 +157,4 @@ public class MainActivity extends Activity {
 		result.setText(converter.convertThis(from, to, myValue));
 	}
 	
-	public void butConvertClicked(View view) {
-		setResult();
-		
-	}
-	
 }
