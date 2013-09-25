@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ConvertThis</string>
+    <string name="action_settings">Settings</string>
+    
+    <string name="To">To</string>
+    <string name="Result">Result</string>
+    <string name="Convert">Convert</string>
+    
+    
+</resources>

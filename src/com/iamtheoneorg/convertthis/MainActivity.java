@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	
+	private static final String TAG = "MainActivity.java";
+
 	private Spinner	fromSpinner;
 	private Spinner toSpinner;
 	private TextView result;
@@ -117,7 +119,7 @@ public class MainActivity extends Activity {
 		converter = new Converter();
 		String fromUnit = fromSpinner.getSelectedItem().toString();
 		
-		ArrayAdapter<String> fromAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, converter.getToUnitsAvailableToFromUnit( fromUnit  ));
+		ArrayAdapter<String> fromAdapter = new ArrayAdapter<String>(this, R.layout.spinner_layout, converter.getToUnitsAvailableToFromUnit( fromUnit  ));
 		
 		toSpinner.setAdapter(fromAdapter);
 		
@@ -127,8 +129,8 @@ public class MainActivity extends Activity {
 		
 		converter = new Converter();
 		
-		ArrayAdapter<String> fromAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,converter.getFromUnits());
-		 
+		ArrayAdapter<String> fromAdapter = new ArrayAdapter<String>(this, R.layout.spinner_layout,converter.getFromUnits());
+		
 		fromSpinner.setAdapter(fromAdapter);
 		
 	}
@@ -152,7 +154,7 @@ public class MainActivity extends Activity {
 			myValue = 0.0;
 		}
 		
-		result.setText("= " + converter.convertThis(from, to, myValue));
+		result.setText(converter.convertThis(from, to, myValue));
 	}
 	
 }

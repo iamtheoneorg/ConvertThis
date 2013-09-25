@@ -5,7 +5,8 @@ import java.util.HashMap;
 
 import android.util.Log;
 
-import com.iamtheoneorg.convertthis.units.*;
+import com.iamtheoneorg.convertthis.units.Feet;
+import com.iamtheoneorg.convertthis.units.Inch;
 
 public class Converter {
 	private final String TAG = "Converter.java";
@@ -13,8 +14,6 @@ public class Converter {
 	
 	private Units[] availlableUnits = new Units[] { 
 			new Inch(),
-			new Meter(),
-			new Centimeter(),
 			
 			new Feet() }; 
 	
