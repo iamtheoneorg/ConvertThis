@@ -15,8 +15,6 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	
-	private static final String TAG = "MainActivity.java";
-
 	private Spinner	fromSpinner;
 	private Spinner toSpinner;
 	private TextView result;
@@ -32,6 +30,7 @@ public class MainActivity extends Activity {
 		toSpinner = (Spinner) findViewById(R.id.toUnit);
 		result = (TextView) findViewById(R.id.result);
 		value = (EditText) findViewById(R.id.valueEditText);
+
 		
 		setFromSpinnerValue();
 		setToSpinnerValue();
@@ -68,12 +67,12 @@ public class MainActivity extends Activity {
 	}
 
 	private void setFromSpinnerEvent() {
+		setToSpinnerValue();
 		fromSpinner.setOnItemSelectedListener(new OnItemSelectedListener(){
 
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
-				setToSpinnerValue();
 				setResult();
 				
 			}
@@ -131,6 +130,7 @@ public class MainActivity extends Activity {
 		
 		ArrayAdapter<String> fromAdapter = new ArrayAdapter<String>(this, R.layout.spinner_layout,converter.getFromUnits());
 		
+		
 		fromSpinner.setAdapter(fromAdapter);
 		
 	}
@@ -154,7 +154,7 @@ public class MainActivity extends Activity {
 			myValue = 0.0;
 		}
 		
-		result.setText(converter.convertThis(from, to, myValue));
+		result.setText("= " + converter.convertThis(from, to, myValue));
 	}
 	
 }
